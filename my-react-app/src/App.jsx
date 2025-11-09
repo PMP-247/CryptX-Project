@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// 1. Import necessary modules (React, components, Tailwind imports if using a global stylesheet)
+import React from 'react';
+import Sidebar from './imports/Sidebar';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import MainContent from './components/MainContent';
+// If you were importing a CSS file directly into this component (less common with Tailwind setup):
+// import './App.css'; 
 
-function App() {
-  const [count, setCount] = useState(0)
+// 2. Define the functional component
+const App = () => {
+    // 3. (Optional) State and functions (Hooks) 
+    const [theme, setTheme] = React.useState('light');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    // 4. Return the JSX (The structure of your application)
+    return (
+        // The root element often sets up the Tailwind CSS context (e.g., font, text color, background)
+        // using utility classes like 'bg-gray-100' or 'font-sans'.
+        <div className={`min-h-screen ${theme === 'light' ? 'bg-white text-gray-800' : 'bg-gray-900 text-white'}`}>
+            
+            {/* Components are composed here, using Tailwind classes internally */}
+            <Header currentTheme={theme} toggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')} />
 
-export default App
+            <main className="container mx-auto p-4">
+                <MainContent />
+            </main>
+
+            <Footer />
+        </div>
+    );
+};
+
+// 5. Export the component
+export default App;
